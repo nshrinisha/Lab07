@@ -37,5 +37,18 @@ def feature_target_sample(housing_data_sample):
 
 def test_data_split(feature_target_sample):
     return_tuple = data_split(*feature_target_sample)
-    # TODO test if the length of return_tuple is 4
-    raise NotImplemented
+    
+    assert len(return_tuple) == 4
+    
+    X_train, X_test, y_train, y_test = return_tuple
+    
+    total_samples_before = len(feature_target_sample[0])
+    total_samples_after = len(X_train) + len(X_test)
+    
+    assert total_samples_before == total_samples_after
+    
+    assert X_train.shape[1] == feature_target_sample[0].shape[1]
+    assert X_test.shape[1] == feature_target_sample[0].shape[1]
+    
+    assert len(y_train.shape) == 1
+    assert len(y_test.shape) == 1
